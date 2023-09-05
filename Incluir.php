@@ -12,6 +12,10 @@
         h1 {
             text-align: center;
         }
+        button{
+            margin-left: 49%;
+            margin-right: 49%;
+        }
     </style>
 </head>
 <body>
@@ -29,7 +33,9 @@
         </label><br>
         <input id="botao" type="submit" value="Enviar">
     </fieldset>
-</form>
+    </form>
+    <br><br>
+<button onclick="window.location.href='Exibir.php'">Exibir</button>
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nome = $_POST["nome"];
