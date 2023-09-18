@@ -19,7 +19,7 @@
     </style>
 </head>
 <body>
-<h1>Formulário</h1>
+<h1>Formulário de inclusão</h1>
 <form action="Incluir.php" id="formulario" method="POST">
     <fieldset style="border:0;" name="Produto">
         <label>Nome*:
@@ -36,6 +36,12 @@
     </form>
     <br><br>
 <button onclick="window.location.href='Exibir.php'">Exibir</button>
+<br><br>
+<button onclick="window.location.href='Buscar.php'">Buscar</button>
+<br><br>
+<button onclick="window.location.href='Alterar.php'">Alterar</button>
+<br><br>
+<button onclick="window.location.href='Excluir.php'">Excluir</button>
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nome = $_POST["nome"];
