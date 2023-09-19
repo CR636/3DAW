@@ -40,8 +40,8 @@
                 echo "<br>";
                 echo "<p><strong>Nome:</strong>".$prod[0]."<br><strong>Preço:</strong>".$prod[1]."<br><strong>Descrição:</strong>".$prod[2]."</p>";
             }
-        fclose($arq);
         }
+    fclose($arq);
     ?>
     <br><br><br>
     <button onclick="window.location.href='Incluir.php'">Voltar para Incluir</button>
