@@ -11,16 +11,18 @@
                 margin-left: 50%;
                 margin-right: 50%;
             }
-            h4,h1 {
+            h1 {
+                text-align: center;
+            }
+            p {
                 text-align: center;
             }
         </style>
     </head>
     <body>
     <h1>Exibindo produtos</h1>
-    <h4>Nome&emsp;Preço&emsp;Descrição</h4>
     <?php
-    $linhas = file("produtos.csv");
+    /*$linhas = file("produtos.csv");
     echo "<table>";
     foreach ($linhas as $linha) {
         echo "<tr>";
@@ -31,7 +33,15 @@
         }
         echo "</tr>";
     }
-    echo "</table>";
+    echo "</table>";*/
+    $arq = fopen("produtos.csv","r");
+    if ($arq !== FALSE) {
+        while (($prod = fgetcsv($arq,200, ",")) !== FALSE) {
+                echo "<br>";
+                echo "<p><strong>Nome:</strong>".$prod[0]."<br><strong>Preço:</strong>".$prod[1]."<br><strong>Descrição:</strong>".$prod[2]."</p>";
+            }
+        fclose($arq);
+        }
     ?>
     <br><br><br>
     <button onclick="window.location.href='Incluir.php'">Voltar para Incluir</button>
