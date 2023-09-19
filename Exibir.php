@@ -25,7 +25,7 @@
     foreach ($linhas as $linha) {
         echo "<tr>";
 
-        $colunas = explode(";", $linha);
+        $colunas = explode(",", $linha);
         foreach ($colunas as $coluna) {
             echo "<td>" . $coluna . "</td>";
         }

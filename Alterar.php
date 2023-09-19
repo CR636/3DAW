@@ -65,7 +65,7 @@ function alterar($nome, $preco, $descricao,$nomeAlt ,$precoAlt ,$descricaoAlt) {
     $dados = [];
     $arq = fopen("produtos.csv","r");
     if ($arq !== FALSE) {
-        while (($prod = fgetcsv($arq,200, ";")) !== FALSE) {
+        while (($prod = fgetcsv($arq,200, ",")) !== FALSE) {
             if ($prod[0] == $nome && $prod[1] == $preco && $prod[2] == $descricao) {
                 $encontrado = true;
                 $prod[0]=$nomeAlt;

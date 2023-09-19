@@ -50,7 +50,7 @@ function buscar($nome, $preco, $descricao) {
     $cont=0;
     $arq = fopen("produtos.csv","r");
     if ($arq !== FALSE) {
-        while (($prod = fgetcsv($arq,200, ";")) !== FALSE) {
+        while (($prod = fgetcsv($arq,200, ",")) !== FALSE) {
             if ($prod[0] == $nome || $prod[1] == $preco || $prod[2] == $descricao) {
                 $encontrado = true;
                 $cont++;

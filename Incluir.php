@@ -52,8 +52,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $arquivo = fopen("produtos.csv", "a") or die("deu erro");
 
 
-    $linhaNome = $nome.";";
-    $linhaPreco = $preco.";";
+    $linhaNome = $nome.",";
+    $linhaPreco = $preco.",";
     $linhaDescricao = $descricao."\n";
 
 
