@@ -98,6 +98,7 @@ function excluir($id,$nome, $valor, $quant) {
 
 <br><br><br>
 <a href='Carrinho.php'>Atualizar Carrinho</a>
+    <br>
 <a href='Produtos.php'>Voltar para Produtos</a>
 </body>
 
