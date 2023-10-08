@@ -39,11 +39,14 @@ if ($arq !== FALSE) {
     while (($prod = fgetcsv($arq, 200, ",")) !== FALSE) {
         echo "<tr>";
         echo "<td>";
-        echo "<form action='Carrinho.php' method='POST'>";
+        echo "<form action=".$_SERVER['PHP_SELF']." onsubmit='window.location.reload()' method='POST'>";
         echo "<input type='hidden' name='id' value='" . $prod[0] . "'>";
-        echo "<input type='text' name='nome' value='" . $prod[1] . "'>";
-        echo "<input type='text' name='quant' value='" . $prod[3] . "'>";
-        echo "R$<input type='text' name='valor' value='" . $prod[2] . "'>";
+        echo "<input type='hidden' name='nome' value='" . $prod[1] . "'>";
+        echo "<input type='text' name='nomeF' value='" . $prod[1] . "'disabled>";
+        echo "<input type='hidden' name='quant' value='" . $prod[3] . "'>";
+        echo "<input type='text' name='quantF' value='" . $prod[3] . "'disabled>";
+        echo "<input type='hidden' name='valor' value='" . $prod[2] . "'>";
+        echo "R$<input type='text' name='valorF' value='" . $prod[2] . "'disabled>";
         echo "<input type='submit' value='Excluir'>";
         echo "</form>";
         echo "</td>";
@@ -62,8 +65,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome = $_POST["nome"];
     $valor = $_POST["valor"];
     $quant = $_POST["quant"];
-
     excluir($id,$nome, $valor, $quant);
+    header("Location: {$_SERVER['PHP_SELF']}");
+    exit;
+
 }
 
 function excluir($id,$nome, $valor, $quant) {
