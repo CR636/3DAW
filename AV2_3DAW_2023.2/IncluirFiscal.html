@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Incluir Fiscal</title>
+    <script>
+        function IncluirFiscal() {
+            let idF = document.getElementById("idF").value;
+            let nomeF = document.getElementById("nomeF").value;
+            let cpfF = document.getElementById("cpfF").value;
+            let salaP = document.getElementById("salaP").value;
+            if (idF == "" || nomeF == "" || cpfF == "" || salaP == "") {
+                alert("Preencha todos os campos!");
+                return;
+            }
+            let xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    let retorno = JSON.parse(this.responseText);
+                    document.getElementById("id").value = retorno.id;
+                    document.getElementById("nome").value = retorno.nome;
+                    document.getElementById("cpf").value = retorno.cpf;
+                    document.getElementById("sala").value = retorno.sala;
+                } else
+                    console.log("Requisicao falhou: " + this.status);
+            }
+            xmlhttp.open("GET", "http://localhost/3daw/AV2_3DAW_2023.2/IncluirFiscal.php?idF=" + idF + "&nomeF=" + nomeF + "&cpfF=" + cpfF + "&salaP=" + salaP);
+            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xmlhttp.send();
+            document.getElementById("resultado").innerHTML = JSON.parse(this.responseText) ;
+        }
+    </script>
+</head>
+<body>
+<h1>Incluir Fiscal</h1>
+<br>
+<form>
+    <label for="idF">ID do Fiscal*</label>
+    <input type="text" id="idF" name="id" placeholder="Digite o ID do Fiscal">
+    <br>
+    <label for="nomeF">Nome do Fiscal*</label>
+    <input type="text" id="nomeF" name="nome" placeholder="Digite o Nome do Fiscal">
+    <br>
+    <label for="cpfF">CPF do Fiscal*</label>
+    <input type="text" id="cpfF" name="cpf" placeholder="Digite o CPF do Fiscal">
+    <br>
+    <label for="salaP">Sala de Prova do Fiscal*</label>
+    <input type="text" id="salaP" name="sala" placeholder="Digite a Sala de Prova do Fiscal">
+    <br>
+    <input type="button" value="Incluir" onclick="new IncluirFiscal()">
+</form>
+<p id="resultado"></p>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Alterar Local de Prova do Candidato</title>
+    <script>
+        function AlterarLocalProva() {
+            let candID = document.getElementById("idC").value;
+            let localP = document.getElementById("localP").value;
+            if (candID == "" || localP == "") {
+                alert("Preencha todos os campos!");
+                return;
+            }
+            let xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    let retorno = JSON.parse(this.responseText);
+                    document.getElementById("id").value = retorno.id;
+                    document.getElementById("local").value = retorno.local;
+                } else
+                    console.log("Requisicao falhou: " + this.status);
+            }
+            xmlhttp.open("GET", "http://localhost/3daw/AV2_3DAW_2023.2/AlterarLocalProva.php?idC=" + candID + "&local=" + localP);
+            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xmlhttp.send();
+            document.getElementById("resultado").innerHTML = JSON.parse(this.responseText) ;
+        }
+        </script>
+</head>
+<body>
+<h1>Alterar Local de Prova do Candidato</h1>
+<form>
+    <label for="idC">ID do Candidato*</label>
+    <input type="text" id="idC" name="id" placeholder="Digite o ID do Candidato">
+    <br>
+    <label for="localP">Local de Prova*</label>
+    <input type="text" id="localP" name="local" placeholder="Digite o novo Local de Prova">
+    <br>
+    <input type="button" value="Alterar" onclick="AlterarLocalProva()">
+    </form>
+    <p id="resultado"></p>
+</body>
+</html>

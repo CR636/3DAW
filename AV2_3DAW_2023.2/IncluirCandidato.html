@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Incluir Candidato</title>
+    <script>
+        function IncluirCandidato() {
+            let idC = document.getElementById("idC").value;
+            let nomeC = document.getElementById("nomeC").value;
+            let cpfC = document.getElementById("cpfC").value;
+            let rgC = document.getElementById("rgC").value;
+            let emailC = document.getElementById("emailC").value;
+            let cargoP = document.getElementById("cargoP").value;
+            let salaP = document.getElementById("salaP").value;
+            if (idC == "" || nomeC == "" || cpfC == "" || rgC == "" || emailC == "" || cargoP == "" || salaP == "") {
+                alert("Preencha todos os campos!");
+                return;
+            }
+            let xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    let retorno = JSON.parse(this.responseText);
+                    document.getElementById("id").value = retorno.id;
+                    document.getElementById("nome").value = retorno.nome;
+                    document.getElementById("cpf").value = retorno.cpf;
+                    document.getElementById("rg").value = retorno.rg;
+                    document.getElementById("email").value = retorno.email;
+                    document.getElementById("cargo").value = retorno.cargo;
+                    document.getElementById("local").value = retorno.local;
+                } else
+                    console.log("Requisicao falhou: " + this.status);
+            }
+            xmlhttp.open("GET", "http://localhost/3daw/AV2_3DAW_2023.2/IncluirCandidato.php?idC=" + idC + "&nomeC=" + nomeC + "&cpfC=" + cpfC + "&rgC=" + rgC + "&emailC=" + emailC + "&cargoP=" + cargoP + "&salaP=" + salaP);
+            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xmlhttp.send();
+            document.getElementById("resultado").innerHTML = JSON.parse(this.responseText) ;
+        }
+    </script>
+</head>
+<body>
+<h1>Incluir Candidato</h1>
+<br>
+<form>
+    <label for="idC">ID do Candidato*</label>
+    <input type="text" id="idC" name="id" placeholder="Digite o ID do Candidato" required>
+    <br>
+    <label for="nomeC">Nome do Candidato*</label>
+    <input type="text" id="nomeC" name="nome" placeholder="Digite o Nome do Candidato" required>
+    <br>
+    <label for="cpfC">CPF do Candidato*</label>
+    <input type="text" id="cpfC" name="cpf" placeholder="Digite o CPF do Candidato" required>
+    <br>
+    <label for="rgC">RG do Candidato*</label>
+    <input type="text" id="rgC" name="rg" placeholder="Digite o RG do Candidato" required>
+    <br>
+    <label for="emailC">Email do Candidato*</label>
+    <input type="email" id="emailC" name="email" placeholder="Digite o Email do Candidato" required>
+    <br>
+    <label for="cargoP">Cargo pretendido do Candidato*</label>
+    <input type="text" id="cargoP" name="cargo" placeholder="Digite o Cargo pretendido do Candidato" required>
+    <br>
+    <label for="salaP">Local de Prova*</label>
+    <input type="text" id="salaP" name="local" placeholder="Digite o Local de Prova" required>
+    <br>
+    <input type="button" value="Incluir" onclick="new IncluirCandidato()">
+</form>
+<p id="resultado"></p>
+</body>
+</html>

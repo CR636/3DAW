@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Listar Candidatos</title>
+    <script>
+        function ListarCandidatos() {
+            let salaP = document.getElementById("salaP").value;
+            if (salaP == "") {
+                alert("Preencha todos os campos!");
+                return;
+            }
+            let xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    let retorno = JSON.parse(this.responseText);
+                    criarTabelaCandidatos(retorno);
+                }
+            }
+            xmlhttp.open("GET", "http://localhost/3daw/ex55_ListarPerguntaDB.php?salaP=" + salaP);
+            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xmlhttp.send();
+        }
+
+        function criarTabelaCandidatos(retorno) {
+            let tabela = document.createElement("table");
+            for (let i=0; i<retorno.length; i++) {
+                CriarLinhaTabela(retorno[i], tabela);
+            }
+            document.getElementById("resposta").appendChild(tabela);
+        }
+
+        function CriarLinhaTabela(retorno, tabela) {
+            let tr = document.createElement("tr");
+            ["idC", "nomeC", "cpfC", "rgC", "emailC", "cargoP", "localP"].forEach(key => {
+                let td = document.createElement("td");
+                td.innerHTML = retorno[key];
+                tr.appendChild(td);
+            });
+            tabela.appendChild(tr);
+        }
+    </script>
+</head>
+<body>
+<h1>Listar Candidatos</h1>
+<br>
+<form>
+    <label for="salaP">Sala de Prova*</label>
+    <input type="text" id="salaP" name="sala" placeholder="Digite a Sala de Prova que deseja ver os candidatos" required>
+    <br>
+    <input type="button" value="Listar" onclick="ListarCandidatos()">
+</form>
+<p id="resposta"></p>
+</body>
+</html>
